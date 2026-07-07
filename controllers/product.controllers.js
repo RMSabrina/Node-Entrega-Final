@@ -1,33 +1,51 @@
-import * as productsService from "../services/products.service.js";
+import * as productsService from '../services/products.service.js';
 
-export const getProducts = (req, res) => {
-    const products = productsService.getProducts();
-
-    res.json(products);
+export const obtenerProductos = async (req, res) => {
+    try {
+        const productos = await productsService.obtenerTodos();
+        res.status(200).json({ data: productos });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener los productos' });
+    }
 };
 
-export const getProductById = (req, res) => {
-    const { id } = req.params;
-
-    const product = productsService.getProductById(id);
-
-    res.json(product);
+export const obtenerProductosPorId = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const producto = await productsService.obtenerPorId(id);
+        
+        if (!producto) {
+            return res.status(404).json({ error: 'Producto no encontrado' });
+        }
+        res.status(200).json({ data: producto });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener el producto' });
+    }
 };
 
-export const createProduct = (req, res) => {
-    const product = req.body;
-
-    const newProduct = productsService.createProduct(product);
-
-    res.status(201).json(newProduct);
+export const crearProductos = async (req, res) => {
+    try {
+        const data = req.body;
+        const nuevoProducto = await productsService.crearProducto(data);
+        res.status(201).json({ 
+            mensaje: 'Producto creado exitosamente', 
+            data: nuevoProducto 
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al crear el producto' });
+    }
 };
 
-export const deleteProduct = (req, res) => {
-    const { id } = req.params;
-
-    productsService.deleteProduct(id);
-
-    res.json({
-        message: "Producto eliminado"
-    });
+export const eliminarProductos = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const eliminado = await productsService.eliminarProducto(id);
+        
+        if (!eliminado) {
+            return res.status(404).json({ error: 'Producto no encontrado para eliminar' });
+        }
+        res.status(200).json({ mensaje: `Producto con ID: ${id} eliminado correctamente` });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al eliminar el producto' });
+    }
 };

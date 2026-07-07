@@ -1,4 +1,4 @@
-export const getProducts = () => {
+export const obtenerTodos = () => {
     return [
         {
             id: 1,
@@ -7,17 +7,17 @@ export const getProducts = () => {
     ];
 };
 
-export const getProductById = (id) => {
+export const obtenerPorId = (id) => {
     return {
         id,
         nombre: "Producto de prueba"
     };
 };
 
-export const createProduct = (product) => {
+export const crearProducto = (product) => {
     return product;
 };
 
-export const deleteProduct = (id) => {
+export const eliminarProducto = (id) => {
     return true;
 };
