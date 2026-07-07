@@ -1,23 +1,18 @@
-export const obtenerTodos = () => {
-    return [
-        {
-            id: 1,
-            nombre: "Producto de prueba"
-        }
-    ];
+import * as modeloProductos from '../models/products.model.js';
+
+export const obtenerTodos = async () => {
+    // Delega la obtención al modelo de datos
+    return await modeloProductos.obtenerTodos();
 };
 
-export const obtenerPorId = (id) => {
-    return {
-        id,
-        nombre: "Producto de prueba"
-    };
+export const obtenerPorId = async (id) => {
+    return await modeloProductos.obtenerPorId(id);
 };
 
-export const crearProducto = (product) => {
-    return product;
+export const crearProducto = async (productoData) => {
+    return await modeloProductos.crearProducto(productoData);
 };
 
-export const eliminarProducto = (id) => {
-    return true;
+export const eliminarProducto = async (id) => {
+    return await modeloProductos.eliminarProducto(id);
 };

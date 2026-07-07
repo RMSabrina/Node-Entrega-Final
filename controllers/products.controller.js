@@ -19,6 +19,7 @@ export const obtenerProductosPorId = async (req, res) => {
         }
         res.status(200).json({ data: producto });
     } catch (error) {
+        console.error("Error capturado en el controlador:", error);
         res.status(500).json({ error: 'Error al obtener el producto' });
     }
 };
@@ -27,6 +28,13 @@ export const crearProductos = async (req, res) => {
     try {
         const data = req.body;
         const nuevoProducto = await productsService.crearProducto(data);
+
+        if (!nuevoProducto) {
+            return res.status(400).json({
+                error: "Ya existe un producto con ese ID."
+            });
+        }
+
         res.status(201).json({ 
             mensaje: 'Producto creado exitosamente', 
             data: nuevoProducto 
