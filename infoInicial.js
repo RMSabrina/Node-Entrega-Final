@@ -137,13 +137,12 @@ const ejecutarMigracion = async () => {
             // setDoc guarda la información en esa referencia exacta
             await setDoc(docRef, producto);
             
-            console.log(`✅ Insertado: ${producto.nombre} -> ID: ${docId}`);
+            console.log(`Insertado: ${producto.nombre} -> ID: ${docId}`);
             
-            // Incrementamos el ID para la próxima iteración del bucle
             idActual++;
             
         } catch (error) {
-            console.error(`❌ Error al insertar "${producto.nombre}":`, error.message);
+            console.error(`Error al insertar "${producto.nombre}":`, error.message);
         }
     }
     

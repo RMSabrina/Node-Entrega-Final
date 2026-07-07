@@ -6,11 +6,16 @@ import {
     eliminarProductos
 } from "../controllers/products.controller.js";
 
+import { verificarToken } from "../middlewares/auth.middleware.js";
+
 const router = Router();
 
+// Rutas públicas
 router.get("/", obtenerProductos);
 router.get("/:id", obtenerProductosPorId);
-router.post("/create", crearProductos);
-router.delete("/:id", eliminarProductos);
+
+// Rutas protegidas
+router.post("/create", verificarToken, crearProductos);
+router.delete("/:id", verificarToken, eliminarProductos);
 
 export default router;

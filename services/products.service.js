@@ -1,7 +1,6 @@
 import * as modeloProductos from '../models/products.model.js';
 
 export const obtenerTodos = async () => {
-    // Delega la obtención al modelo de datos
     return await modeloProductos.obtenerTodos();
 };
 
