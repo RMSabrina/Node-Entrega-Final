@@ -20,6 +20,9 @@ app.use("/auth", authRoutes);
 app.get('/api', (req, res) => {
     res.json({ mensaje: 'Bienvenido a la API del proyecto' });
 });
+app.get('/', (req, res) => {
+    res.json({ mensaje: 'Bienvenido. Para utilizar esta API, realice las peticiones incluyendo /api' });
+});
 
 
 // Middleware para manejar rutas desconocidas (404)
