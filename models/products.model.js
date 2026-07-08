@@ -5,7 +5,6 @@ const coleccionProductos = collection(db, 'products');
 
 export const obtenerTodos = async () => {
     const listadoProductos = await getDocs(coleccionProductos);
-    // Mapeamos los documentos devueltos para incluir su ID único de Firestore
     return listadoProductos.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
